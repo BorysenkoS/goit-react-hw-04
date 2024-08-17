@@ -17,8 +17,6 @@ function App() {
 
   const onLoadMore = () => {
     setPageNumber((pageNumber) => pageNumber + 1);
-
-    setPhotos((prev) => [...prev, ...photos]);
   };
 
   useEffect(() => {
@@ -27,7 +25,8 @@ function App() {
       try {
         setLoading(true);
         const data = await fetchPhotosApi(searchValue, pageNumber);
-        setPhotos(data.results);
+
+        setPhotos((prev) => [...prev, ...data.results]);
         setTotalPage(data.total_pages);
       } catch (error) {
         setError(error.message);
