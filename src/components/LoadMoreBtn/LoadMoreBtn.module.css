@@ -5,6 +5,7 @@
   margin: 0 auto;
   display: block;
   cursor: pointer;
+  background-color: rgba(112, 211, 221, 0.3);
 }
 
 .loadMoreBtn:hover,

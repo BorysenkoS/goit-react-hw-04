@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import "./App.css";
+import { fetchPhotosApi } from "./components/services/photos-api";
 import SearchBar from "./components/SearchBar/SearchBar";
 import ImageGallery from "./components/ImageGallery/ImageGallery";
 import Loader from "./components/Loader/Loader";
 import ErrorMessage from "./components/ErrorMessage/ErrorMessage";
-import { fetchPhotosApi } from "./components/services/photos-api";
 import LoadMoreBtn from "./components/LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "./components/ImageModal/ImageModal";
 
 function App() {
   const [photos, setPhotos] = useState([]);
@@ -14,6 +14,16 @@ function App() {
   const [searchValue, setSearchValue] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [onPhoto, setOnPhoto] = useState({ url: "", alt: "" });
+
+  const openModal = () => {
+    setIsOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setIsOpenModal(false);
+  };
 
   const onLoadMore = () => {
     setPageNumber((pageNumber) => pageNumber + 1);
@@ -45,10 +55,20 @@ function App() {
   return (
     <>
       <SearchBar onSubmit={onSubmit} />
+      <ImageModal
+        isOpenModal={isOpenModal}
+        closeModal={closeModal}
+        onPhoto={onPhoto}
+      />
       {loading && <Loader />}
       {error !== null && <ErrorMessage errorMessage={error} />}
       {photos.length > 0 && (
-        <ImageGallery pageNumber={pageNumber} photos={photos} />
+        <ImageGallery
+          pageNumber={pageNumber}
+          photos={photos}
+          openModal={openModal}
+          setOnPhoto={setOnPhoto}
+        />
       )}
       {pageNumber < totalPage && <LoadMoreBtn onLoadMore={onLoadMore} />}
     </>

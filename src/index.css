@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 20px;
+  background-color: rgba(13, 43, 26, 0.3);
 }
 
 img {
@@ -10,4 +11,17 @@ img {
 
 ul {
   list-style: none;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 1000ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
 }

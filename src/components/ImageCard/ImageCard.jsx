@@ -1,7 +1,19 @@
-const ImageCard = ({ url, alt }) => {
+import css from "./ImageCard.module.css";
+
+const ImageCard = ({ url, alt, openModal, setOnPhoto }) => {
+  const handleClick = () => {
+    setOnPhoto({ url: url.regular, alt: alt });
+    openModal();
+  };
   return (
-    <div>
-      <img src={url} alt={alt} width={320} height={220} />
+    <div onClick={handleClick} className={css.wrapper}>
+      <img
+        className={css.photo}
+        src={url.small}
+        alt={alt}
+        width={320}
+        height={220}
+      />
     </div>
   );
 };
