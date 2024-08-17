@@ -1,6 +1,7 @@
 .searchBar {
   text-align: center;
   padding: 10px;
+  margin-bottom: 30px;
 }
 
 .searchInput {
@@ -31,4 +32,8 @@
   cursor: pointer;
   color: #6087fa;
   transition: color linear 250ms;
+}
+
+.formErrorMessage {
+  color: red;
 }

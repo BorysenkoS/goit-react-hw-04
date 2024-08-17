@@ -1,3 +1,4 @@
+import ImageCard from "../ImageCard/ImageCard";
 import css from "./ImageGallery.module.css";
 
 const ImageGallery = ({ photos }) => {
@@ -6,15 +7,7 @@ const ImageGallery = ({ photos }) => {
       {photos.map((photo) => {
         return (
           <li key={photo.id}>
-            <div className={css.photosItem}>
-              <img
-                className={css.photos}
-                src={photo.urls.small}
-                alt={photo.alt_description}
-                width={300}
-                height={250}
-              />
-            </div>
+            <ImageCard url={photo.urls.small} alt={photo.alt_description} />
           </li>
         );
       })}
