@@ -25,15 +25,12 @@ function App() {
     setIsOpenModal(false);
   };
 
-  const onLoadMore = () => {
-    setPageNumber((pageNumber) => pageNumber + 1);
-  };
-
   useEffect(() => {
     if (searchValue.trim() === "") return;
-    const fetchPhotosBySearchValue = async (searchValue) => {
+    const fetchPhotosBySearchValue = async () => {
       try {
         setLoading(true);
+
         const data = await fetchPhotosApi(searchValue, pageNumber);
 
         setPhotos((prev) => [...prev, ...data.results]);
@@ -44,12 +41,18 @@ function App() {
         setLoading(false);
       }
     };
-    fetchPhotosBySearchValue(searchValue);
+    fetchPhotosBySearchValue();
   }, [searchValue, pageNumber]);
 
   const onSubmit = (searchTerm) => {
     setPhotos([]);
     setSearchValue(searchTerm);
+    setPageNumber(1);
+  };
+  const onLoadMore = () => {
+    setPageNumber((pageNumber) => pageNumber + 1);
+
+    console.log(pageNumber);
   };
 
   return (
@@ -64,7 +67,6 @@ function App() {
       {error !== null && <ErrorMessage errorMessage={error} />}
       {photos.length > 0 && (
         <ImageGallery
-          pageNumber={pageNumber}
           photos={photos}
           openModal={openModal}
           setOnPhoto={setOnPhoto}

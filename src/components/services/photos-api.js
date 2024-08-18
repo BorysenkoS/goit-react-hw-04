@@ -19,7 +19,7 @@ import axios from "axios";
 //   return data;
 // };
 
-export const fetchPhotosApi = async (searchValue, pageNumber) => {
+export const fetchPhotosApi = async (searchValue, pageNumber = 1) => {
   const params = {
     query: searchValue,
     page: pageNumber,
